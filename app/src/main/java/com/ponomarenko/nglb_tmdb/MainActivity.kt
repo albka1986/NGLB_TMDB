@@ -9,13 +9,34 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.lifecycle.lifecycleScope
 import com.ponomarenko.nglb_tmdb.ui.theme.NGLB_TMDBTheme
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
+
+    var isLoading by mutableStateOf(true)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        lifecycleScope.launch {
+            delay(2000)
+            isLoading = false
+        }
+
+        installSplashScreen().apply {
+            setKeepOnScreenCondition {
+                isLoading
+            }
+        }
         enableEdgeToEdge()
         setContent {
             NGLB_TMDBTheme {
