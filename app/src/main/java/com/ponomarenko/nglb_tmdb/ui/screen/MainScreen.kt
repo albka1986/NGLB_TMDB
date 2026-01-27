@@ -14,6 +14,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.ponomarenko.nglb_tmdb.ui.components.MovieListItem
 import com.ponomarenko.nglb_tmdb.ui.theme.NGLB_TMDBTheme
 import com.ponomarenko.nglb_tmdb.ui.viewmodel.MainViewModel
 import org.koin.androidx.compose.koinViewModel
@@ -53,12 +54,7 @@ fun MainScreen(
             items(moviesPagingItems.itemCount) { index ->
                 val movie = moviesPagingItems[index]
                 if (movie != null) {
-                    Text(
-                        text = movie.title,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(horizontal = 16.dp, vertical = 8.dp)
-                    )
+                    MovieListItem(movieTitle = movie.title)
                 }
             }
         }

@@ -1,6 +1,8 @@
 package com.ponomarenko.nglb_tmdb.di
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import com.ponomarenko.nglb_tmdb.BuildConfig
+import com.ponomarenko.nglb_tmdb.data.remote.AuthInterceptor
 import com.ponomarenko.nglb_tmdb.data.remote.TmdbApi
 import com.ponomarenko.nglb_tmdb.data.repository.MovieRepository
 import com.ponomarenko.nglb_tmdb.ui.viewmodel.MainViewModel
@@ -13,14 +15,11 @@ import org.koin.dsl.module
 import retrofit2.Retrofit
 
 private const val TMDB_BASE_URL = "https://api.themoviedb.org/3/"
-private const val TMDB_API_KEY = "REPLACE_WITH_YOUR_TMDB_API_KEY"
 
 val appModule = module {
 
-    // ViewModels
     viewModel { MainViewModel(movieRepository = get()) }
 
-    // Networking
     single {
         HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
@@ -28,7 +27,14 @@ val appModule = module {
     }
 
     single {
+        AuthInterceptor(
+            token = BuildConfig.TMDB_API_KEY,
+        )
+    }
+
+    single {
         OkHttpClient.Builder()
+            .addInterceptor(get<AuthInterceptor>())
             .addInterceptor(get<HttpLoggingInterceptor>())
             .build()
     }
@@ -51,11 +57,9 @@ val appModule = module {
 
     single<TmdbApi> { get<Retrofit>().create(TmdbApi::class.java) }
 
-    // Repositories
     single {
         MovieRepository(
             api = get(),
-            apiKey = TMDB_API_KEY,
         )
     }
 }

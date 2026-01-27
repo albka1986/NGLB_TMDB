@@ -7,14 +7,12 @@ import com.ponomarenko.nglb_tmdb.data.remote.TmdbApi
 
 class PopularMoviesPagingSource(
     private val api: TmdbApi,
-    private val apiKey: String,
 ) : PagingSource<Int, MovieDto>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, MovieDto> {
         return try {
             val page = params.key ?: 1
             val response = api.getPopularMovies(
-                apiKey = apiKey,
                 page = page,
             )
 

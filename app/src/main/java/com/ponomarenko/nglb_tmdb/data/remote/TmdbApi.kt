@@ -1,3 +1,5 @@
+@file:OptIn(kotlinx.serialization.InternalSerializationApi::class)
+
 package com.ponomarenko.nglb_tmdb.data.remote
 
 import kotlinx.serialization.Serializable
@@ -8,7 +10,6 @@ interface TmdbApi {
 
     @GET("movie/popular")
     suspend fun getPopularMovies(
-        @Query("api_key") apiKey: String,
         @Query("page") page: Int = 1,
     ): PopularMoviesResponse
 }
@@ -25,5 +26,6 @@ data class MovieDto(
     val title: String,
     val overview: String? = null,
     val poster_path: String? = null,
+    val release_date: String? = null
 )
 
