@@ -21,6 +21,8 @@ import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.ponomarenko.nglb_tmdb.domain.model.Movie
 import com.ponomarenko.nglb_tmdb.ui.theme.NGLB_TMDBTheme
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 @Composable
 fun MovieListItem(
@@ -59,8 +61,12 @@ fun MovieListItem(
 
                 Spacer(modifier = Modifier.height(4.dp))
 
+                val formattedDate = movie.releaseDate?.let {
+                    SimpleDateFormat("dd.MM.yyyy", Locale.GERMANY).format(it)
+                }
+
                 Text(
-                    text = movie.overview.orEmpty(),
+                    text = formattedDate.orEmpty(),
                     style = MaterialTheme.typography.bodyMedium,
                     maxLines = 3
                 )
@@ -73,13 +79,14 @@ fun MovieListItem(
 @Composable
 fun MovieListItemPreview() {
     NGLB_TMDBTheme {
+        val date = SimpleDateFormat("yyyy-MM-dd", Locale.US).parse("2023-09-15")
         MovieListItem(
             movie = Movie(
                 id = 1,
                 title = "Movie Title",
                 overview = "This is a sample overview for the movie. This overview is a bit longer to test how the text wrapping and max lines work.",
                 posterPath = "/6nUfVSFKYeDSZWy3ZmtQz60GRY4.jpg",
-                releaseDate = "2023-09-15"
+                releaseDate = date
             )
         )
     }
