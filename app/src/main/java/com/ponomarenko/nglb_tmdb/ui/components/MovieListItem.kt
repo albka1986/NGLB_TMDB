@@ -21,7 +21,9 @@ import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.ponomarenko.nglb_tmdb.domain.model.Movie
 import com.ponomarenko.nglb_tmdb.ui.theme.NGLB_TMDBTheme
+import com.ponomarenko.nglb_tmdb.ui.util.toGermanFormattedString
 import java.text.SimpleDateFormat
+import java.util.Date
 import java.util.Locale
 
 @Composable
@@ -61,12 +63,8 @@ fun MovieListItem(
 
                 Spacer(modifier = Modifier.height(4.dp))
 
-                val formattedDate = movie.releaseDate?.let {
-                    SimpleDateFormat("dd.MM.yyyy", Locale.GERMANY).format(it)
-                }
-
                 Text(
-                    text = formattedDate.orEmpty(),
+                    text = movie.releaseDate?.toGermanFormattedString().orEmpty(),
                     style = MaterialTheme.typography.bodyMedium,
                     maxLines = 3
                 )

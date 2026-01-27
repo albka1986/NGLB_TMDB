@@ -32,17 +32,9 @@ fun MainScreen(viewModel: MainViewModel = koinViewModel()) {
         ) {
             item {
                 Text(
-                    text = "Neugelb TMDB",
-                    textAlign = TextAlign.Center,
-                    style = MaterialTheme.typography.headlineLarge,
-                    modifier = Modifier
-                        .padding(24.dp)
-                        .fillMaxWidth()
-                )
-                Text(
                     text = "Last movies",
                     textAlign = TextAlign.Center,
-                    style = MaterialTheme.typography.titleLarge,
+                    style = MaterialTheme.typography.headlineMedium,
                     modifier = Modifier
                         .padding(horizontal = 12.dp)
                         .fillMaxWidth()
