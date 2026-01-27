@@ -13,9 +13,7 @@ import kotlinx.coroutines.flow.map
 
 private const val NETWORK_PAGE_SIZE = 20
 
-class MovieRepository(
-    private val api: TmdbApi,
-) {
+class MovieRepository(private val api: TmdbApi) {
 
     fun popularMovies(): Flow<PagingData<Movie>> {
         return Pager(
@@ -24,9 +22,7 @@ class MovieRepository(
                 enablePlaceholders = false,
             ),
             pagingSourceFactory = {
-                PopularMoviesPagingSource(
-                    api = api,
-                )
+                PopularMoviesPagingSource(api = api)
             },
         ).flow
             .map { pagingData -> pagingData.map(MovieDto::toDomain) }

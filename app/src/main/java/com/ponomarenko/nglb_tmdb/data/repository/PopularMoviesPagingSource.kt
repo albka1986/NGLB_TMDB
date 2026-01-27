@@ -13,13 +13,12 @@ class PopularMoviesPagingSource(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, MovieDto> {
         return try {
             val page = params.key ?: 1
-            val response = api.getPopularMovies(page = page)
+            val response = api.fetchAllMovies(page = page)
             Timber.d(
                 "PopularMoviesPagingSource.load success page=%d, results=%d",
                 page,
                 response.results.size
             )
-
             LoadResult.Page(
                 data = response.results,
                 prevKey = if (page == 1) null else page - 1,

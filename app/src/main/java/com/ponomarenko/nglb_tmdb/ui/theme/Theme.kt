@@ -1,8 +1,12 @@
 package com.ponomarenko.nglb_tmdb.ui.theme
 
+import android.app.Activity
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
+import androidx.compose.ui.platform.LocalView
+import androidx.core.view.WindowCompat
 
 private val darkScheme = darkColorScheme(
     primary = primaryDark,
@@ -44,8 +48,18 @@ private val darkScheme = darkColorScheme(
 
 @Composable
 fun NGLB_TMDBTheme(content: @Composable () -> Unit) {
+    val colorScheme = darkScheme
+    val view = LocalView.current
+    if (!view.isInEditMode) {
+        SideEffect {
+            val window = (view.context as Activity).window
+            WindowCompat.setDecorFitsSystemWindows(window, false)
+            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = false
+        }
+    }
+
     MaterialTheme(
-        colorScheme = darkScheme,
+        colorScheme = colorScheme,
         typography = AppTypography,
         content = content
     )

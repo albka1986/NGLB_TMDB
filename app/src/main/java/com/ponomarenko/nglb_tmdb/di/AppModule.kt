@@ -13,6 +13,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
+import timber.log.Timber
 
 private const val TMDB_BASE_URL = "https://api.themoviedb.org/3/"
 
@@ -21,7 +22,11 @@ val appModule = module {
     viewModel { MainViewModel(movieRepository = get()) }
 
     single {
-        HttpLoggingInterceptor().apply {
+        HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
+            override fun log(message: String) {
+                Timber.tag("OkHttp").d(message)
+            }
+        }).apply {
             level = HttpLoggingInterceptor.Level.BODY
         }
     }

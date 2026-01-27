@@ -8,9 +8,10 @@ import retrofit2.http.Query
 
 interface TmdbApi {
 
-    @GET("movie/popular")
-    suspend fun getPopularMovies(
+    @GET("discover/movie")
+    suspend fun fetchAllMovies(
         @Query("page") page: Int = 1,
+        @Query(value = "sort_by") sorBy: String = "primary_release_date.desc"
     ): PopularMoviesResponse
 }
 
