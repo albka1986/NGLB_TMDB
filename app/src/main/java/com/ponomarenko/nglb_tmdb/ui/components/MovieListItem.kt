@@ -1,6 +1,5 @@
 package com.ponomarenko.nglb_tmdb.ui.components
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -10,8 +9,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Face
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -21,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil3.compose.AsyncImage
 import com.ponomarenko.nglb_tmdb.domain.model.Movie
 import com.ponomarenko.nglb_tmdb.ui.theme.NGLB_TMDBTheme
 
@@ -33,16 +31,15 @@ fun MovieListItem(
         modifier = modifier
             .fillMaxWidth()
             .height(142.dp)
-            .padding(horizontal = 16.dp, vertical = 8.dp)
+            .padding(horizontal = 8.dp, vertical = 2.dp)
     ) {
-
         Row(
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
         ) {
-            Image(
-                imageVector = Icons.Default.Face,
+            AsyncImage(
+                model = "https://image.tmdb.org/t/p/w500/${movie.posterPath}",
                 contentDescription = "Movie Poster"
             )
             Spacer(modifier = Modifier.width(16.dp))
@@ -77,7 +74,7 @@ fun MovieListItemPreview() {
                 id = 1,
                 title = "Movie Title",
                 overview = "This is a sample overview for the movie.",
-                posterPath = null,
+                posterPath = "/6nUfVSFKYeDSZWy3ZmtQz60GRY4.jpg",
                 releaseDate = "2023-09-15"
             )
         )
