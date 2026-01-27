@@ -11,19 +11,17 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.ponomarenko.nglb_tmdb.domain.model.Movie
 import com.ponomarenko.nglb_tmdb.ui.components.MovieListItem
-import com.ponomarenko.nglb_tmdb.ui.theme.NGLB_TMDBTheme
 import com.ponomarenko.nglb_tmdb.ui.viewmodel.MainViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun MainScreen(
-    viewModel: MainViewModel = koinViewModel(),
-) {
-    val moviesPagingItems = viewModel.popularMovies.collectAsLazyPagingItems()
+fun MainScreen(viewModel: MainViewModel = koinViewModel()) {
+    val moviesPagingItems: LazyPagingItems<Movie> = viewModel.popularMovies.collectAsLazyPagingItems()
 
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
         LazyColumn(
@@ -53,18 +51,10 @@ fun MainScreen(
 
             items(moviesPagingItems.itemCount) { index ->
                 val movie = moviesPagingItems[index]
-                if (movie != null) {
-                    MovieListItem(movieTitle = movie.title)
+                movie?.let {
+                    MovieListItem(movie = it)
                 }
             }
         }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun MainScreenPreview() {
-    NGLB_TMDBTheme {
-        Text("MainScreen preview")
     }
 }

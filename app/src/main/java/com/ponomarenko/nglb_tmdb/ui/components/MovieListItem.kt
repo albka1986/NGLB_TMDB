@@ -1,10 +1,11 @@
 package com.ponomarenko.nglb_tmdb.ui.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -17,13 +18,15 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.ponomarenko.nglb_tmdb.domain.model.Movie
 import com.ponomarenko.nglb_tmdb.ui.theme.NGLB_TMDBTheme
 
 @Composable
 fun MovieListItem(
-    movieTitle: String,
+    movie: Movie,
     modifier: Modifier = Modifier
 ) {
     Card(
@@ -32,21 +35,35 @@ fun MovieListItem(
             .height(142.dp)
             .padding(horizontal = 16.dp, vertical = 8.dp)
     ) {
+
         Row(
-            modifier = Modifier.padding(16.dp),
+            modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Start
+            horizontalArrangement = Arrangement.Center
         ) {
             Image(
                 imageVector = Icons.Default.Face,
-                contentDescription = "Movie Poster",
-                modifier = Modifier.fillMaxHeight()
+                contentDescription = "Movie Poster"
             )
             Spacer(modifier = Modifier.width(16.dp))
-            Text(
-                text = movieTitle,
-                style = MaterialTheme.typography.bodyLarge
-            )
+
+            Column(
+                modifier = Modifier
+                    .background(Color.Cyan)
+                    .padding(16.dp)
+            ) {
+                Text(
+                    text = movie.title,
+                    style = MaterialTheme.typography.bodyLarge
+                )
+
+                Text(
+                    text = movie.overview.orEmpty(),
+                    style = MaterialTheme.typography.bodyMedium,
+                    modifier = Modifier.weight(1f),
+                    maxLines = 2
+                )
+            }
         }
     }
 }
@@ -55,6 +72,14 @@ fun MovieListItem(
 @Composable
 fun MovieListItemPreview() {
     NGLB_TMDBTheme {
-        MovieListItem("Sample Movie Title")
+        MovieListItem(
+            movie = Movie(
+                id = 1,
+                title = "Movie Title",
+                overview = "This is a sample overview for the movie.",
+                posterPath = null,
+                releaseDate = "2023-09-15"
+            )
+        )
     }
 }
