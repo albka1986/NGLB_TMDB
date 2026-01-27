@@ -2,20 +2,18 @@ package com.ponomarenko.nglb_tmdb.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
+import com.ponomarenko.nglb_tmdb.data.remote.MovieDto
+import com.ponomarenko.nglb_tmdb.data.repository.MovieRepository
+import kotlinx.coroutines.flow.Flow
 
-class MainViewModel : ViewModel() {
+class MainViewModel(
+    movieRepository: MovieRepository,
+) : ViewModel() {
 
-    private val _isLoading = MutableStateFlow(true)
-    val isLoading = _isLoading.asStateFlow()
-
-    init {
-        viewModelScope.launch {
-            delay(2000)
-            _isLoading.value = false
-        }
-    }
+    val popularMovies: Flow<PagingData<MovieDto>> =
+        movieRepository
+            .popularMovies()
+            .cachedIn(viewModelScope)
 }
