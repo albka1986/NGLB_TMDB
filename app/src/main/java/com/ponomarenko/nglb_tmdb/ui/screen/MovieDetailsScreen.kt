@@ -3,7 +3,6 @@ package com.ponomarenko.nglb_tmdb.ui.screen
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -106,26 +105,27 @@ fun MovieDetailsContent(movieDetails: MovieDetails) {
                 .height(300.dp),
             contentScale = ContentScale.Fit
         )
-        Spacer(modifier = Modifier.height(16.dp))
         Text(
             text = movieDetails.title,
+            modifier = Modifier.padding(vertical = 8.dp),
             style = MaterialTheme.typography.headlineMedium
         )
-        Spacer(modifier = Modifier.height(8.dp))
-        Text(
-            text = movieDetails.overview,
-            style = MaterialTheme.typography.bodyLarge
-        )
-        Spacer(modifier = Modifier.height(8.dp))
         Text(
             text = movieDetails.releaseDate,
+            modifier = Modifier.padding(vertical = 8.dp),
             style = MaterialTheme.typography.bodyLarge
         )
-        Spacer(modifier = Modifier.height(8.dp))
         Text(
             text = movieDetails.genres.joinToString(", "),
+            modifier = Modifier.padding(vertical = 8.dp),
             style = MaterialTheme.typography.bodyLarge
         )
+        Text(
+            text = movieDetails.overview,
+            modifier = Modifier.padding(vertical = 8.dp),
+            style = MaterialTheme.typography.bodyLarge
+        )
+
     }
 }
 

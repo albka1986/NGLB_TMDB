@@ -26,6 +26,7 @@ class MovieRepositoryImpl(private val api: TmdbApi) : MovieRepository {
         Pager(
             config = PagingConfig(
                 pageSize = NETWORK_PAGE_SIZE,
+                prefetchDistance = NETWORK_PAGE_SIZE,
                 enablePlaceholders = false,
             ),
             pagingSourceFactory = {
