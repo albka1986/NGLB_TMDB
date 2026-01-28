@@ -4,10 +4,10 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.map
+import com.ponomarenko.nglb_tmdb.data.mapper.toDomain
+import com.ponomarenko.nglb_tmdb.data.mapper.toMovieDetails
 import com.ponomarenko.nglb_tmdb.data.remote.TmdbApi
 import com.ponomarenko.nglb_tmdb.data.remote.dto.MovieDto
-import com.ponomarenko.nglb_tmdb.data.remote.toDomain
-import com.ponomarenko.nglb_tmdb.data.source.remote.dto.toMovieDetails
 import com.ponomarenko.nglb_tmdb.domain.model.Movie
 import com.ponomarenko.nglb_tmdb.domain.model.MovieDetails
 import com.ponomarenko.nglb_tmdb.domain.repository.MovieRepository
