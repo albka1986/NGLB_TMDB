@@ -8,10 +8,8 @@ fun MovieDto.toDomain(): Movie {
         id = id,
         title = title,
         overview = overview,
-        posterPath = posterPath?.let { "$TMDB_IMAGE_DOMAIN$it" },
+        posterPath = posterPath?.let { "$TMDB_IMAGE_BASE_URL/w500$it" },
         releaseDate = releaseDate,
         rating = popularity
     )
 }
-
-private const val TMDB_IMAGE_DOMAIN = "https://image.tmdb.org/t/p/w500/"

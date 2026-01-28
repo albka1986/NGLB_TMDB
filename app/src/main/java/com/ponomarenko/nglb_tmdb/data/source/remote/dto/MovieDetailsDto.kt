@@ -1,5 +1,6 @@
 package com.ponomarenko.nglb_tmdb.data.source.remote.dto
 
+import com.ponomarenko.nglb_tmdb.data.remote.TMDB_IMAGE_BASE_URL
 import com.ponomarenko.nglb_tmdb.domain.model.MovieDetails
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -31,8 +32,8 @@ fun MovieDetailsDto.toMovieDetails(): MovieDetails {
         id = id,
         title = title,
         overview = overview,
-        posterPath = posterPath?.let { "https://image.tmdb.org/t/p/w500$it" },
-        backdropPath = backdropPath?.let { "https://image.tmdb.org/t/p/original$it" },
+        posterPath = posterPath?.let { "$TMDB_IMAGE_BASE_URL/w500$it" },
+        backdropPath = backdropPath?.let { "$TMDB_IMAGE_BASE_URL/original$it" },
         releaseDate = releaseDate,
         voteAverage = voteAverage,
         genres = genres.map { it.name }
