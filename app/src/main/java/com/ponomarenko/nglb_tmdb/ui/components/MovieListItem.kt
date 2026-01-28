@@ -28,7 +28,7 @@ import com.ponomarenko.nglb_tmdb.R
 import com.ponomarenko.nglb_tmdb.domain.model.Movie
 import com.ponomarenko.nglb_tmdb.ui.theme.NGLB_TMDBTheme
 import com.ponomarenko.nglb_tmdb.util.toGermanFormattedString
-import com.ponomarenko.nglb_tmdb.util.toDate
+import com.ponomarenko.nglb_tmdb.util.toLocalDate
 
 @Composable
 fun MovieListItem(
@@ -76,7 +76,7 @@ fun MovieListItem(
 
                 movie.releaseDate?.let {
                     Text(
-                        text = it.toDate()?.toGermanFormattedString() ?: "",
+                        text = it.toLocalDate()?.toGermanFormattedString() ?: "",
                         style = MaterialTheme.typography.bodyMedium,
                         maxLines = 1
                     )

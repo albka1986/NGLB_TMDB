@@ -1,23 +1,23 @@
 package com.ponomarenko.nglb_tmdb.util
 
 import timber.log.Timber
-import java.text.ParseException
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.time.format.DateTimeParseException
 
-private const val ORIGIN_FORMAT_DATE = "yyyy-MM-dd"
-private const val GERMAN_FORMAT_DATE = "dd.MM.yyyy"
+private val originDateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
 
-fun String.toDate(): Date? {
-    val parser = SimpleDateFormat(ORIGIN_FORMAT_DATE, Locale.GERMANY)
+private val germanDateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
+
+fun String.toLocalDate(): LocalDate? {
     return try {
-        parser.parse(this)
-    } catch (e: ParseException) {
-        Timber.e(e)
+        LocalDate.parse(this, originDateFormatter)
+    } catch (e: DateTimeParseException) {
+        Timber.e(e, "Failed to parse date string: $this")
         null
     }
 }
 
-fun Date.toGermanFormattedString(): String =
-    SimpleDateFormat(GERMAN_FORMAT_DATE, Locale.GERMANY).format(this)
+fun LocalDate.toGermanFormattedString(): String {
+    return this.format(germanDateFormatter)
+}
