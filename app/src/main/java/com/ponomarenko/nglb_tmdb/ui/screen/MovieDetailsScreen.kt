@@ -8,6 +8,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.CircularProgressIndicator
@@ -85,8 +87,12 @@ fun MovieDetailsScreen(
 
 @Composable
 fun MovieDetailsContent(movieDetails: MovieDetails) {
+    val scrollState = rememberScrollState()
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(scrollState)
+            .padding(horizontal = 16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top
     ) {
@@ -100,25 +106,24 @@ fun MovieDetailsContent(movieDetails: MovieDetails) {
                 .height(300.dp),
             contentScale = ContentScale.Fit
         )
+        Spacer(modifier = Modifier.height(16.dp))
         Text(
             text = movieDetails.title,
-            modifier = Modifier.padding(vertical = 8.dp),
             style = MaterialTheme.typography.headlineMedium
         )
         Spacer(modifier = Modifier.height(8.dp))
         Text(
-            text = movieDetails.overview,
-            modifier = Modifier.padding(vertical = 8.dp),
+            text = movieDetails.overview ?: "",
             style = MaterialTheme.typography.bodyLarge
         )
+        Spacer(modifier = Modifier.height(8.dp))
         Text(
             text = movieDetails.releaseDate,
-            modifier = Modifier.padding(vertical = 8.dp),
             style = MaterialTheme.typography.bodyLarge
         )
+        Spacer(modifier = Modifier.height(8.dp))
         Text(
             text = movieDetails.genres.joinToString(", "),
-            modifier = Modifier.padding(vertical = 8.dp),
             style = MaterialTheme.typography.bodyLarge
         )
     }
