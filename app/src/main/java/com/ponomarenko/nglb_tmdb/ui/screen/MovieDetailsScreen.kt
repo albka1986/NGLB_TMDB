@@ -113,7 +113,7 @@ fun MovieDetailsContent(movieDetails: MovieDetails) {
         )
         Spacer(modifier = Modifier.height(8.dp))
         Text(
-            text = movieDetails.overview ?: "",
+            text = movieDetails.overview,
             style = MaterialTheme.typography.bodyLarge
         )
         Spacer(modifier = Modifier.height(8.dp))

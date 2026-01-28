@@ -5,15 +5,12 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.ponomarenko.nglb_tmdb.domain.model.Movie
-import com.ponomarenko.nglb_tmdb.domain.repository.MovieRepository
+import com.ponomarenko.nglb_tmdb.domain.use_case.GetMoviesUseCase
 import kotlinx.coroutines.flow.Flow
 
-class MainViewModel(
-    movieRepository: MovieRepository,
-) : ViewModel() {
+class MainViewModel(getMoviesUseCase: GetMoviesUseCase) : ViewModel() {
 
     val popularMovies: Flow<PagingData<Movie>> =
-        movieRepository
-            .getMovies()
+        getMoviesUseCase()
             .cachedIn(viewModelScope)
 }

@@ -1,4 +1,4 @@
-package com.ponomarenko.nglb_tmdb.data.source.remote.dto
+package com.ponomarenko.nglb_tmdb.data.remote.dto
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

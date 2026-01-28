@@ -1,7 +1,7 @@
 package com.ponomarenko.nglb_tmdb.data.remote
 
 import com.ponomarenko.nglb_tmdb.data.remote.dto.AllMoviesResponse
-import com.ponomarenko.nglb_tmdb.data.source.remote.dto.MovieDetailsDto
+import com.ponomarenko.nglb_tmdb.data.remote.dto.MovieDetailsDto
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

@@ -9,11 +9,9 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
+import com.ponomarenko.nglb_tmdb.data.remote.TmdbConstants
 import retrofit2.Retrofit
 import timber.log.Timber
-
-private const val TMDB_BASE_URL = "https://api.themoviedb.org/3/"
-const val TMDB_IMAGE_BASE_URL = "https://image.tmdb.org/t/p/"
 
 val apiModule = module {
     single {
@@ -48,7 +46,7 @@ val apiModule = module {
     single {
         val contentType = "application/json".toMediaType()
         Retrofit.Builder()
-            .baseUrl(TMDB_BASE_URL)
+            .baseUrl(TmdbConstants.BASE_URL)
             .client(get())
             .addConverterFactory(get<Json>().asConverterFactory(contentType))
             .build()
