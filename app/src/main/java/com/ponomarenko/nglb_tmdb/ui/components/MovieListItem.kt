@@ -3,12 +3,10 @@ package com.ponomarenko.nglb_tmdb.ui.components
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Card
@@ -85,9 +83,9 @@ fun MovieListItem(
                             contentDescription = "Rating",
                             modifier = Modifier.size(16.dp)
                         )
-                        Spacer(modifier = Modifier.width(4.dp))
                         Text(
                             text = "%.1f".format(it),
+                            modifier = Modifier.padding(start = 4.dp),
                             style = MaterialTheme.typography.bodyMedium,
                             maxLines = 1
                         )

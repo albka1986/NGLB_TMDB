@@ -20,4 +20,3 @@ fun String.toLocalDate(): LocalDate? {
 
 fun LocalDate.toGermanFormattedString(): String =
     this.format(germanDateFormatter)
-
