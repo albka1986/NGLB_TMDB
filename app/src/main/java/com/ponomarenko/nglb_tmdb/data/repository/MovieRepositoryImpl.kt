@@ -27,7 +27,7 @@ class MovieRepositoryImpl(private val api: TmdbApi) : MovieRepository {
                 enablePlaceholders = false,
             ),
             pagingSourceFactory = {
-                PopularMoviesPagingSource(api = api)
+                AllMoviesPagingSource(api = api)
             },
         ).flow
             .map { pagingData -> pagingData.map(MovieDto::toDomain) }
