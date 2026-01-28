@@ -3,15 +3,19 @@ package com.ponomarenko.nglb_tmdb.data.mapper
 import com.ponomarenko.nglb_tmdb.data.source.remote.dto.MovieDetailsDto
 import com.ponomarenko.nglb_tmdb.di.TMDB_IMAGE_BASE_URL
 import com.ponomarenko.nglb_tmdb.domain.model.MovieDetails
+import com.ponomarenko.nglb_tmdb.util.toGermanFormattedString
+import com.ponomarenko.nglb_tmdb.util.toLocalDate
 
 fun MovieDetailsDto.toMovieDetails(): MovieDetails =
     MovieDetails(
         id = id,
         title = title,
-        overview = overview,
+        overview = overview.orEmpty(),
         posterPath = posterPath?.let { "$TMDB_IMAGE_BASE_URL/w500$it" },
         backdropPath = backdropPath?.let { "$TMDB_IMAGE_BASE_URL/original$it" },
-        releaseDate = releaseDate,
+        releaseDate = releaseDate?.toLocalDate()
+            ?.toGermanFormattedString()
+            .orEmpty(),
         voteAverage = voteAverage,
         genres = genres.map { it.name }
     )

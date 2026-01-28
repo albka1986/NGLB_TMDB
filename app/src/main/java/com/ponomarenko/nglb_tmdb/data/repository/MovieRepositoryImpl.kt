@@ -4,7 +4,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.map
-import com.ponomarenko.nglb_tmdb.data.mapper.toDomain
+import com.ponomarenko.nglb_tmdb.data.mapper.toMovie
 import com.ponomarenko.nglb_tmdb.data.mapper.toMovieDetails
 import com.ponomarenko.nglb_tmdb.data.remote.TmdbApi
 import com.ponomarenko.nglb_tmdb.data.remote.dto.MovieDto
@@ -32,7 +32,7 @@ class MovieRepositoryImpl(private val api: TmdbApi) : MovieRepository {
                 AllMoviesPagingSource(api = api)
             },
         ).flow
-            .map { pagingData -> pagingData.map(MovieDto::toDomain) }
+            .map { pagingData -> pagingData.map(MovieDto::toMovie) }
 
 
     override fun getMovieDetails(movieId: Int): Flow<Result<MovieDetails>> =

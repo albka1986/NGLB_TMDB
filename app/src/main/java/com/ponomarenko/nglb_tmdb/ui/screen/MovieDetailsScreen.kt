@@ -86,9 +86,7 @@ fun MovieDetailsScreen(
 @Composable
 fun MovieDetailsContent(movieDetails: MovieDetails) {
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
+        modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top
     ) {
@@ -109,12 +107,19 @@ fun MovieDetailsContent(movieDetails: MovieDetails) {
         )
         Spacer(modifier = Modifier.height(8.dp))
         Text(
-            text = movieDetails.overview ?: "",
-            style = MaterialTheme.typography.bodyMedium
+            text = movieDetails.overview,
+            modifier = Modifier.padding(vertical = 8.dp),
+            style = MaterialTheme.typography.bodyLarge
         )
         Text(
-            text = movieDetails.releaseDate.toString(),
-            style = MaterialTheme.typography.bodyMedium
+            text = movieDetails.releaseDate,
+            modifier = Modifier.padding(vertical = 8.dp),
+            style = MaterialTheme.typography.bodyLarge
+        )
+        Text(
+            text = movieDetails.genres.joinToString(", "),
+            modifier = Modifier.padding(vertical = 8.dp),
+            style = MaterialTheme.typography.bodyLarge
         )
     }
 }
