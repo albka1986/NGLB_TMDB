@@ -22,7 +22,10 @@ import com.ponomarenko.nglb_tmdb.ui.viewmodel.MainViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun MainScreen(viewModel: MainViewModel = koinViewModel()) {
+fun MainScreen(
+    viewModel: MainViewModel = koinViewModel(),
+    onMovieClick: (Int) -> Unit
+) {
     val moviesPagingItems: LazyPagingItems<Movie> = viewModel.popularMovies.collectAsLazyPagingItems()
     val placeholder = painterResource(id = R.drawable.placeholder_movie)
 
@@ -49,7 +52,8 @@ fun MainScreen(viewModel: MainViewModel = koinViewModel()) {
                 movie?.let {
                     MovieListItem(
                         movie = it,
-                        placeholder = placeholder
+                        placeholder = placeholder,
+                        onClick = onMovieClick
                     )
                 }
             }

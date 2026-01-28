@@ -32,9 +32,11 @@ import java.util.Locale
 fun MovieListItem(
     movie: Movie,
     placeholder: Painter,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onClick: (Int) -> Unit
 ) {
     Card(
+        onClick = { onClick(movie.id) },
         modifier = modifier
             .fillMaxWidth()
             .height(142.dp)
@@ -95,7 +97,8 @@ fun MovieListItemPreview() {
                 posterPath = "/6nUfVSFKYeDSZWy3ZmtQz60GRY4.jpg",
                 releaseDate = date
             ),
-            placeholder = placeholder
+            placeholder = placeholder,
+            onClick = {}
         )
     }
 }

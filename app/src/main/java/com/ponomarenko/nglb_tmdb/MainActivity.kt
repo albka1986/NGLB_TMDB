@@ -5,7 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.ponomarenko.nglb_tmdb.ui.screen.MainScreen
+import com.ponomarenko.nglb_tmdb.ui.navigation.NavGraph
 import com.ponomarenko.nglb_tmdb.ui.theme.NGLB_TMDBTheme
 
 class MainActivity : ComponentActivity() {
@@ -16,7 +16,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             NGLB_TMDBTheme {
-                MainScreen()
+                NavGraph()
             }
         }
     }
