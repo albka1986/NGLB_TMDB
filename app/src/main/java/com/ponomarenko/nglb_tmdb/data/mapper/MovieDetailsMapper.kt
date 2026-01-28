@@ -11,9 +11,8 @@ fun MovieDetailsDto.toMovieDetails(): MovieDetails =
         id = id,
         title = title,
         overview = overview.orEmpty(),
-        posterPath = posterPath?.let { "${TmdbConstants.IMAGE_BASE_URL}${TmdbConstants.POSTER_SIZE_W500}$it" },
+        posterPath = posterPath?.let { "${TmdbConstants.POSTER_URL_W500}$it" },
         releaseDate = releaseDate?.toLocalDate()
-            ?.toGermanFormattedString()
-            .orEmpty(),
+            ?.toGermanFormattedString().orEmpty(),
         genres = genres.map { it.name }
     )

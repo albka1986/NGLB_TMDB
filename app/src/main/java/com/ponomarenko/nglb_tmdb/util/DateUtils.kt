@@ -18,6 +18,6 @@ fun String.toLocalDate(): LocalDate? {
     }
 }
 
-fun LocalDate.toGermanFormattedString(): String {
-    return this.format(germanDateFormatter)
-}
+fun LocalDate.toGermanFormattedString(): String =
+    this.format(germanDateFormatter)
+

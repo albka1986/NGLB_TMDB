@@ -8,8 +8,7 @@ fun MovieDto.toMovie(): Movie =
     Movie(
         id = id,
         title = title,
-        overview = overview,
-        posterPath = posterPath?.let { "${TmdbConstants.IMAGE_BASE_URL}${TmdbConstants.POSTER_SIZE_W500}$it" },
-        releaseDate = releaseDate,
+        posterPath = posterPath?.let { "${TmdbConstants.POSTER_URL_W500}$it" },
+        releaseDate = releaseDate.orEmpty(),
         rating = popularity
     )

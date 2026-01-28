@@ -6,8 +6,7 @@ import androidx.compose.runtime.Immutable
 data class Movie(
     val id: Int,
     val title: String,
-    val overview: String? = null,
     val posterPath: String? = null,
-    val releaseDate: String?,
+    val releaseDate: String,
     val rating: Float?
 )

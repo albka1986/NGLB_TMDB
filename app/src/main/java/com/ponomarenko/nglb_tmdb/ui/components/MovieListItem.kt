@@ -16,7 +16,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
@@ -38,14 +37,6 @@ fun MovieListItem(
     modifier: Modifier = Modifier,
     onClick: (Int) -> Unit
 ) {
-    // Avoid doing date parsing / string formatting on every recomposition while scrolling.
-    val formattedReleaseDate = remember(movie.releaseDate) {
-        movie.releaseDate?.toLocalDate()?.toGermanFormattedString().orEmpty()
-    }
-    val ratingText = remember(movie.rating) {
-        movie.rating?.let { "%.1f".format(it) }.orEmpty()
-    }
-
     Card(
         onClick = { onClick(movie.id) },
         modifier = modifier
@@ -68,11 +59,9 @@ fun MovieListItem(
                     .padding(4.dp),
                 contentScale = ContentScale.Fit
             )
-            Spacer(modifier = Modifier.width(16.dp))
-
             Column(
                 modifier = Modifier
-                    .padding(vertical = 8.dp, horizontal = 4.dp)
+                    .padding(vertical = 8.dp, horizontal = 12.dp)
                     .weight(1f)
             ) {
                 Text(
@@ -81,17 +70,13 @@ fun MovieListItem(
                     maxLines = 2
                 )
 
-                Spacer(modifier = Modifier.height(4.dp))
-
-                movie.releaseDate?.let {
-                    Text(
-                        text = it.toLocalDate()?.toGermanFormattedString() ?: "",
-                        style = MaterialTheme.typography.bodyMedium,
-                        maxLines = 1
-                    )
-                }
-
-                Spacer(modifier = Modifier.height(4.dp))
+                Text(
+                    text = movie.releaseDate.toLocalDate()
+                        ?.toGermanFormattedString() ?: "",
+                    style = MaterialTheme.typography.bodyMedium,
+                    modifier = Modifier.padding(top = 6.dp),
+                    maxLines = 1
+                )
 
                 movie.rating?.let {
                     Row(verticalAlignment = Alignment.CenterVertically) {
@@ -103,7 +88,6 @@ fun MovieListItem(
                         Spacer(modifier = Modifier.width(4.dp))
                         Text(
                             text = "%.1f".format(it),
-//                            text = ratingText,
                             style = MaterialTheme.typography.bodyMedium,
                             maxLines = 1
                         )
@@ -123,7 +107,6 @@ fun MovieListItemPreview() {
             movie = Movie(
                 id = 1,
                 title = "Movie Title",
-                overview = "This is a sample overview for the movie. This overview is a bit longer to test how the text wrapping and max lines work.",
                 posterPath = "/6nUfVSFKYeDSZWy3ZmtQz60GRY4.jpg",
                 releaseDate = "2023-09-15",
                 rating = 7.2f
