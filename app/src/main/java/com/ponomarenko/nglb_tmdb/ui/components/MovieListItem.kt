@@ -9,7 +9,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Card
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -44,8 +47,8 @@ fun MovieListItem(
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Start
+            horizontalArrangement = Arrangement.Start,
+            verticalAlignment = Alignment.CenterVertically
         ) {
             AsyncImage(
                 model = movie.posterPath,
@@ -72,12 +75,33 @@ fun MovieListItem(
 
                 Spacer(modifier = Modifier.height(4.dp))
 
-                Text(
-                    text = movie.releaseDate?.toGermanFormattedString()
-                        .orEmpty(),
-                    style = MaterialTheme.typography.bodyMedium,
-                    maxLines = 3
-                )
+                movie.releaseDate?.let {
+                    val parser = SimpleDateFormat("yyyy-MM-dd", Locale.US)
+                    val date = parser.parse(it)
+                    Text(
+                        text = date?.toGermanFormattedString() ?: "",
+                        style = MaterialTheme.typography.bodyMedium,
+                        maxLines = 1
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(4.dp))
+
+                movie.rating?.let {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(
+                            imageVector = Icons.Filled.Star,
+                            contentDescription = "Rating",
+                            modifier = Modifier.size(16.dp)
+                        )
+                        Spacer(modifier = Modifier.width(4.dp))
+                        Text(
+                            text = "%.1f".format(it),
+                            style = MaterialTheme.typography.bodyMedium,
+                            maxLines = 1
+                        )
+                    }
+                }
             }
         }
     }
@@ -87,7 +111,6 @@ fun MovieListItem(
 @Composable
 fun MovieListItemPreview() {
     NGLB_TMDBTheme {
-        val date = SimpleDateFormat("yyyy-MM-dd", Locale.US).parse("2023-09-15")
         val placeholder = painterResource(id = R.drawable.placeholder_movie)
         MovieListItem(
             movie = Movie(
@@ -95,7 +118,8 @@ fun MovieListItemPreview() {
                 title = "Movie Title",
                 overview = "This is a sample overview for the movie. This overview is a bit longer to test how the text wrapping and max lines work.",
                 posterPath = "/6nUfVSFKYeDSZWy3ZmtQz60GRY4.jpg",
-                releaseDate = date
+                releaseDate = "2023-09-15",
+                rating = 7.2f
             ),
             placeholder = placeholder,
             onClick = {}

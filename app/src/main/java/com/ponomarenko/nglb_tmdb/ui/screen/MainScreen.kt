@@ -15,6 +15,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
+import androidx.paging.compose.itemKey
 import com.ponomarenko.nglb_tmdb.R
 import com.ponomarenko.nglb_tmdb.domain.model.Movie
 import com.ponomarenko.nglb_tmdb.ui.components.MovieListItem
@@ -47,7 +48,10 @@ fun MainScreen(
                 )
             }
 
-            items(moviesPagingItems.itemCount) { index ->
+            items(
+                count = moviesPagingItems.itemCount,
+                key = moviesPagingItems.itemKey { it.id }
+            ) { index ->
                 val movie = moviesPagingItems[index]
                 movie?.let {
                     MovieListItem(

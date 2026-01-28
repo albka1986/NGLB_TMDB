@@ -1,7 +1,6 @@
 package com.ponomarenko.nglb_tmdb.domain.model
 
 import androidx.compose.runtime.Immutable
-import java.util.Date
 
 @Immutable
 data class Movie(
@@ -9,5 +8,6 @@ data class Movie(
     val title: String,
     val overview: String? = null,
     val posterPath: String? = null,
-    val releaseDate: Date? = null
+    val releaseDate: String?,
+    val rating: Float?
 )

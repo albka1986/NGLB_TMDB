@@ -8,6 +8,7 @@ data class MovieDto(
     val id: Int,
     val title: String,
     val overview: String? = null,
+    val popularity: Float? = null,
     @SerialName("poster_path") val posterPath: String? = null,
     @SerialName("release_date") val releaseDate: String? = null
 )

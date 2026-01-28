@@ -99,17 +99,21 @@ fun MovieDetailsContent(movieDetails: MovieDetails) {
             error = painterResource(id = R.drawable.placeholder_movie),
             modifier = Modifier
                 .fillMaxWidth()
-                .height(400.dp),
-            contentScale = ContentScale.Crop
+                .height(300.dp),
+            contentScale = ContentScale.Fit
         )
-        Spacer(modifier = Modifier.height(16.dp))
         Text(
             text = movieDetails.title,
+            modifier = Modifier.padding(vertical = 8.dp),
             style = MaterialTheme.typography.headlineMedium
         )
         Spacer(modifier = Modifier.height(8.dp))
         Text(
             text = movieDetails.overview ?: "",
+            style = MaterialTheme.typography.bodyMedium
+        )
+        Text(
+            text = movieDetails.releaseDate.toString(),
             style = MaterialTheme.typography.bodyMedium
         )
     }
