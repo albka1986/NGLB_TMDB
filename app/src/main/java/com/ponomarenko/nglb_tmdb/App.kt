@@ -1,7 +1,10 @@
 package com.ponomarenko.nglb_tmdb
 
 import android.app.Application
+import com.ponomarenko.nglb_tmdb.di.apiModule
 import com.ponomarenko.nglb_tmdb.di.appModule
+import com.ponomarenko.nglb_tmdb.di.repositoryModule
+import com.ponomarenko.nglb_tmdb.di.useCaseModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -11,7 +14,7 @@ class App : Application() {
         super.onCreate()
         startKoin {
             androidContext(this@App)
-            modules(appModule)
+            modules(appModule, apiModule, repositoryModule, useCaseModule)
         }
     }
 }

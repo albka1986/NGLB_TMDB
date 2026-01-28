@@ -2,8 +2,8 @@ package com.ponomarenko.nglb_tmdb.data.repository
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.ponomarenko.nglb_tmdb.data.remote.MovieDto
 import com.ponomarenko.nglb_tmdb.data.remote.TmdbApi
+import com.ponomarenko.nglb_tmdb.data.remote.dto.MovieDto
 import timber.log.Timber
 
 class PopularMoviesPagingSource(

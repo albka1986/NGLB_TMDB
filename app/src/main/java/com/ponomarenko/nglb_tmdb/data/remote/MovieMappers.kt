@@ -1,5 +1,6 @@
 package com.ponomarenko.nglb_tmdb.data.remote
 
+import com.ponomarenko.nglb_tmdb.data.remote.dto.MovieDto
 import com.ponomarenko.nglb_tmdb.domain.model.Movie
 import timber.log.Timber
 import java.text.ParseException

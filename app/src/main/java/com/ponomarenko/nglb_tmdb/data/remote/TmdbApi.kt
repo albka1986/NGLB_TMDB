@@ -1,10 +1,9 @@
-@file:OptIn(kotlinx.serialization.InternalSerializationApi::class)
-
 package com.ponomarenko.nglb_tmdb.data.remote
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import com.ponomarenko.nglb_tmdb.data.remote.dto.PopularMoviesResponse
+import com.ponomarenko.nglb_tmdb.data.source.remote.dto.MovieDetailsDto
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface TmdbApi {
@@ -14,19 +13,9 @@ interface TmdbApi {
         @Query("page") page: Int = 1,
         @Query(value = "sort_by") sorBy: String = "primary_release_date.desc"
     ): PopularMoviesResponse
+
+    @GET("movie/{movie_id}")
+    suspend fun fetchMovieDetails(
+        @Path("movie_id") movieId: Int
+    ): MovieDetailsDto
 }
-
-@Serializable
-data class PopularMoviesResponse(
-    val page: Int,
-    val results: List<MovieDto>,
-)
-
-@Serializable
-data class MovieDto(
-    val id: Int,
-    val title: String,
-    val overview: String? = null,
-    @SerialName("poster_path") val posterPath: String? = null,
-    @SerialName("release_date") val releaseDate: String? = null
-)
