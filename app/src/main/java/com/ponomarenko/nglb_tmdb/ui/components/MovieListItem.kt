@@ -27,9 +27,8 @@ import coil3.compose.AsyncImage
 import com.ponomarenko.nglb_tmdb.R
 import com.ponomarenko.nglb_tmdb.domain.model.Movie
 import com.ponomarenko.nglb_tmdb.ui.theme.NGLB_TMDBTheme
-import com.ponomarenko.nglb_tmdb.ui.util.toGermanFormattedString
-import java.text.SimpleDateFormat
-import java.util.Locale
+import com.ponomarenko.nglb_tmdb.util.toGermanFormattedString
+import com.ponomarenko.nglb_tmdb.util.toDate
 
 @Composable
 fun MovieListItem(
@@ -76,10 +75,8 @@ fun MovieListItem(
                 Spacer(modifier = Modifier.height(4.dp))
 
                 movie.releaseDate?.let {
-                    val parser = SimpleDateFormat("yyyy-MM-dd", Locale.US)
-                    val date = parser.parse(it)
                     Text(
-                        text = date?.toGermanFormattedString() ?: "",
+                        text = it.toDate()?.toGermanFormattedString() ?: "",
                         style = MaterialTheme.typography.bodyMedium,
                         maxLines = 1
                     )
