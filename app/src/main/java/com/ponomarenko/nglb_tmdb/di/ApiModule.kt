@@ -13,6 +13,7 @@ import retrofit2.Retrofit
 import timber.log.Timber
 
 private const val TMDB_BASE_URL = "https://api.themoviedb.org/3/"
+const val TMDB_IMAGE_BASE_URL = "https://image.tmdb.org/t/p/"
 
 val apiModule = module {
     single {

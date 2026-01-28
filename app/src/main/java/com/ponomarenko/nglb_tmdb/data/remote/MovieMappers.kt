@@ -1,6 +1,7 @@
 package com.ponomarenko.nglb_tmdb.data.remote
 
 import com.ponomarenko.nglb_tmdb.data.remote.dto.MovieDto
+import com.ponomarenko.nglb_tmdb.di.TMDB_IMAGE_BASE_URL
 import com.ponomarenko.nglb_tmdb.domain.model.Movie
 
 fun MovieDto.toDomain(): Movie {

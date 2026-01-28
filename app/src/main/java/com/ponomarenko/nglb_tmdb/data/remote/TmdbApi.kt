@@ -1,6 +1,6 @@
 package com.ponomarenko.nglb_tmdb.data.remote
 
-import com.ponomarenko.nglb_tmdb.data.remote.dto.PopularMoviesResponse
+import com.ponomarenko.nglb_tmdb.data.remote.dto.AllMoviesResponse
 import com.ponomarenko.nglb_tmdb.data.source.remote.dto.MovieDetailsDto
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -12,7 +12,7 @@ interface TmdbApi {
     suspend fun fetchAllMovies(
         @Query("page") page: Int = 1,
         @Query(value = "sort_by") sorBy: String = "primary_release_date.desc"
-    ): PopularMoviesResponse
+    ): AllMoviesResponse
 
     @GET("movie/{movie_id}")
     suspend fun fetchMovieDetails(

@@ -1,6 +1,6 @@
 package com.ponomarenko.nglb_tmdb.data.source.remote.dto
 
-import com.ponomarenko.nglb_tmdb.data.remote.TMDB_IMAGE_BASE_URL
+import com.ponomarenko.nglb_tmdb.di.TMDB_IMAGE_BASE_URL
 import com.ponomarenko.nglb_tmdb.domain.model.MovieDetails
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
