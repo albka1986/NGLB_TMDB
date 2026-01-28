@@ -10,10 +10,12 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.ponomarenko.nglb_tmdb.R
 import com.ponomarenko.nglb_tmdb.domain.model.Movie
 import com.ponomarenko.nglb_tmdb.ui.components.MovieListItem
 import com.ponomarenko.nglb_tmdb.ui.viewmodel.MainViewModel
@@ -22,6 +24,7 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun MainScreen(viewModel: MainViewModel = koinViewModel()) {
     val moviesPagingItems: LazyPagingItems<Movie> = viewModel.popularMovies.collectAsLazyPagingItems()
+    val placeholder = painterResource(id = R.drawable.placeholder_movie)
 
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
         LazyColumn(
@@ -44,7 +47,10 @@ fun MainScreen(viewModel: MainViewModel = koinViewModel()) {
             items(moviesPagingItems.itemCount) { index ->
                 val movie = moviesPagingItems[index]
                 movie?.let {
-                    MovieListItem(movie = it)
+                    MovieListItem(
+                        movie = it,
+                        placeholder = placeholder
+                    )
                 }
             }
         }

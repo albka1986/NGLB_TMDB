@@ -2,6 +2,7 @@
 
 package com.ponomarenko.nglb_tmdb.data.remote
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -26,7 +27,6 @@ data class MovieDto(
     val id: Int,
     val title: String,
     val overview: String? = null,
-    val poster_path: String? = null,
-    val release_date: String? = null
+    @SerialName("poster_path") val posterPath: String? = null,
+    @SerialName("release_date") val releaseDate: String? = null
 )
-

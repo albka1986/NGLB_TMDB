@@ -15,20 +15,23 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
+import com.ponomarenko.nglb_tmdb.R
 import com.ponomarenko.nglb_tmdb.domain.model.Movie
 import com.ponomarenko.nglb_tmdb.ui.theme.NGLB_TMDBTheme
 import com.ponomarenko.nglb_tmdb.ui.util.toGermanFormattedString
 import java.text.SimpleDateFormat
-import java.util.Date
 import java.util.Locale
 
 @Composable
 fun MovieListItem(
     movie: Movie,
+    placeholder: Painter,
     modifier: Modifier = Modifier
 ) {
     Card(
@@ -43,10 +46,14 @@ fun MovieListItem(
             horizontalArrangement = Arrangement.Start
         ) {
             AsyncImage(
-                model = "https://image.tmdb.org/t/p/w500/${movie.posterPath}",
+                model = movie.posterPath,
                 contentDescription = "Movie Poster",
-                modifier = Modifier.size(width = 95.dp, height = 142.dp),
-                contentScale = ContentScale.Crop
+                placeholder = placeholder,
+                error = placeholder,
+                modifier = Modifier
+                    .size(width = 95.dp, height = 142.dp)
+                    .padding(4.dp),
+                contentScale = ContentScale.Fit
             )
             Spacer(modifier = Modifier.width(16.dp))
 
@@ -64,7 +71,8 @@ fun MovieListItem(
                 Spacer(modifier = Modifier.height(4.dp))
 
                 Text(
-                    text = movie.releaseDate?.toGermanFormattedString().orEmpty(),
+                    text = movie.releaseDate?.toGermanFormattedString()
+                        .orEmpty(),
                     style = MaterialTheme.typography.bodyMedium,
                     maxLines = 3
                 )
@@ -78,6 +86,7 @@ fun MovieListItem(
 fun MovieListItemPreview() {
     NGLB_TMDBTheme {
         val date = SimpleDateFormat("yyyy-MM-dd", Locale.US).parse("2023-09-15")
+        val placeholder = painterResource(id = R.drawable.placeholder_movie)
         MovieListItem(
             movie = Movie(
                 id = 1,
@@ -85,7 +94,8 @@ fun MovieListItemPreview() {
                 overview = "This is a sample overview for the movie. This overview is a bit longer to test how the text wrapping and max lines work.",
                 posterPath = "/6nUfVSFKYeDSZWy3ZmtQz60GRY4.jpg",
                 releaseDate = date
-            )
+            ),
+            placeholder = placeholder
         )
     }
 }
