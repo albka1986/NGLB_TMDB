@@ -19,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
@@ -49,7 +50,7 @@ fun MovieListItem(
         ) {
             AsyncImage(
                 model = movie.posterPath,
-                contentDescription = "Movie Poster",
+                contentDescription = stringResource(id = R.string.movie_list_item_poster_description),
                 placeholder = placeholder,
                 error = placeholder,
                 modifier = Modifier
@@ -59,7 +60,7 @@ fun MovieListItem(
             )
             Column(
                 modifier = Modifier
-                    .padding(vertical = 8.dp, horizontal = 12.dp)
+                    .padding(vertical = 8.dp, horizontal = 16.dp)
                     .weight(1f)
             ) {
                 Text(
@@ -71,16 +72,19 @@ fun MovieListItem(
                 Text(
                     text = movie.releaseDate.toLocalDate()
                         ?.toGermanFormattedString() ?: "",
+                    modifier = Modifier.padding(top = 4.dp),
                     style = MaterialTheme.typography.bodyMedium,
-                    modifier = Modifier.padding(top = 6.dp),
                     maxLines = 1
                 )
 
                 movie.rating?.let {
-                    Row(verticalAlignment = Alignment.CenterVertically) {
+                    Row(
+                        modifier = Modifier.padding(top = 4.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
                         Icon(
                             imageVector = Icons.Filled.Star,
-                            contentDescription = "Rating",
+                            contentDescription = stringResource(id = R.string.movie_list_item_rating_description),
                             modifier = Modifier.size(16.dp)
                         )
                         Text(

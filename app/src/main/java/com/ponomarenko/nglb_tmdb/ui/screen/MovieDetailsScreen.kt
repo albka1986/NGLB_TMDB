@@ -27,6 +27,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
@@ -52,12 +53,12 @@ fun MovieDetailsScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Movie Details") },
+                title = { Text(stringResource(id = R.string.movie_details_title)) },
                 navigationIcon = {
                     IconButton(onClick = onUpClick) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Back"
+                            contentDescription = stringResource(id = R.string.movie_details_back_description)
                         )
                     }
                 }
@@ -76,7 +77,7 @@ fun MovieDetailsScreen(
                         MovieDetailsContent(movieDetails)
                     },
                     onFailure = {
-                        Text("Error loading movie details")
+                        Text(stringResource(id = R.string.movie_details_error))
                     }
                 )
             } ?: CircularProgressIndicator()
@@ -97,7 +98,7 @@ fun MovieDetailsContent(movieDetails: MovieDetails) {
     ) {
         AsyncImage(
             model = movieDetails.posterPath,
-            contentDescription = "Movie Poster",
+            contentDescription = stringResource(id = R.string.movie_details_poster_description),
             placeholder = painterResource(id = R.drawable.placeholder_movie),
             error = painterResource(id = R.drawable.placeholder_movie),
             modifier = Modifier
@@ -107,25 +108,24 @@ fun MovieDetailsContent(movieDetails: MovieDetails) {
         )
         Text(
             text = movieDetails.title,
-            modifier = Modifier.padding(vertical = 8.dp),
+            modifier = Modifier.padding(top = 16.dp),
             style = MaterialTheme.typography.headlineMedium
         )
         Text(
-            text = movieDetails.releaseDate,
-            modifier = Modifier.padding(vertical = 8.dp),
-            style = MaterialTheme.typography.bodyLarge
-        )
-        Text(
-            text = movieDetails.genres.joinToString(", "),
-            modifier = Modifier.padding(vertical = 8.dp),
-            style = MaterialTheme.typography.bodyLarge
-        )
-        Text(
             text = movieDetails.overview,
-            modifier = Modifier.padding(vertical = 8.dp),
+            modifier = Modifier.padding(top = 8.dp),
             style = MaterialTheme.typography.bodyLarge
         )
-
+        Text(
+            text = stringResource(id = R.string.movie_details_genres_label, movieDetails.genres.joinToString(", ")),
+            modifier = Modifier.padding(top = 16.dp),
+            style = MaterialTheme.typography.bodyMedium
+        )
+        Text(
+            text = stringResource(id = R.string.movie_details_release_date_label, movieDetails.releaseDate ?: ""),
+            modifier = Modifier.padding(top = 8.dp),
+            style = MaterialTheme.typography.bodyMedium
+        )
     }
 }
 

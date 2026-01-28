@@ -1,3 +1,20 @@
 <resources>
-    <string name="app_name">NGLB_TMDB</string>
+    <string name="app_name">NGLB TMDB</string>
+
+    <!-- Main Screen -->
+    <string name="main_screen_title">Last movies</string>
+    <string name="search_placeholder">Search…</string>
+    <string name="search_clear_description">Clear search</string>
+
+    <!-- Movie Details Screen -->
+    <string name="movie_details_title">Movie Details</string>
+    <string name="movie_details_error">Error loading movie details.</string>
+    <string name="movie_details_poster_description">Movie Poster</string>
+    <string name="movie_details_back_description">Back</string>
+    <string name="movie_details_genres_label">Genres: %1$s</string>
+    <string name="movie_details_release_date_label">Release Date: %1$s</string>
+
+    <!-- Movie List Item -->
+    <string name="movie_list_item_poster_description">Movie Poster</string>
+    <string name="movie_list_item_rating_description">Rating</string>
 </resources>

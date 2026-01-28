@@ -46,4 +46,16 @@ class MovieRepositoryImpl(private val api: TmdbApi) : MovieRepository {
                 emit(Result.failure(e))
             }
         }.flowOn(Dispatchers.IO)
+
+    override fun searchMovies(query: String): Flow<PagingData<Movie>> = Pager(
+        config = PagingConfig(
+            pageSize = NETWORK_PAGE_SIZE,
+            prefetchDistance = NETWORK_PAGE_SIZE,
+            enablePlaceholders = false,
+        ),
+        pagingSourceFactory = {
+            SearchMoviesPagingSource(api = api, query = query)
+        },
+    ).flow
+        .map { pagingData -> pagingData.map(MovieDto::toMovie) }
 }
